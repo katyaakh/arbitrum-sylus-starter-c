@@ -1,35 +1,60 @@
-# Arbitrum Stylus Starter Template for C
+# Smart Agriculture Sensor Network
 
-## Register and Storage Slots
+Blockchain-based IoT sensor data collection and reward system.
 
-Storage slots are pretty similar to registers in 32bit architectures.
-Since both have:
+## Features
 
-1. Fixed Size: Storage slots in Ethereum can hold exactly 32 bytes. Similar to how registers have a fixed size in assembly (e.g., 32-bit, 64-bit).
+- Sensor data submission (humidity, soil moisture)
+- Token rewards for valid submissions
+- Real-time data visualization
+- Automated validation
 
-2. Direct Addressing: Just as you access a specific register by its identifier (eax, r1), you access storage slots using their indexes: 0x01, 0x02.
+## Setup
 
-3. Explicit Management: Like assembly programming, developers must explicitly manage how storage slots are allocated and used. Miss assignment of memory/slots can cause data corruption.
+```bash
+# Install dependencies
+make
 
-## Requisitos
+# Run tests
+make test
 
-- Brew (Mac) / Chocolatey (Windows)
-- Docker (Docker Desktop)
-- clang y maketools
-- LLVM (con wasm-ld): Disponible desde la versión 15 (llvm@15)
-- Rust cargo
+# Deploy contract
+make deploy network=<network_name>
 
-## Check to have `wasm-strip` installed
+# Verify contract
+make verify network=<network_name>
 
-Podemos instalarlo con `brew install wabt`
+# Build frontend
+make frontend
+```
 
-## Instalando Cargo Stylus
+## Contract Details
 
-- `git submodule update --init --recursive`
-- `cargo install cargo-stylus`
-- `rustup target add wasm32-unknown-unknown`
+- Validation ranges: 0-100% for both humidity and soil moisture
+- Reward rate: 1 token per valid submission
+- Bonus rewards for consistent submissions
 
-## Validar entorno de desarollo
+## Frontend
 
-- `make` para generar el archivo contract.wasm
-- `cargo stylus check --wasm-file ./contract.wasm -e https://sepolia-rollup.arbitrum.io/rpc` (si tenemos output en verde estamos ok)
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Visit `http://localhost:3000`
+
+## Directory Structure
+
+```
+├── src/             # Contract implementation
+├── include/         # Header files
+├── tests/           # Contract tests
+├── frontend/        # Web interface
+├── scripts/         # Deployment scripts
+└── public/          # Static assets
+```
+
+## License
+
+MIT
